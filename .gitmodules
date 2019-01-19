@@ -1,3 +1,3 @@
 [submodule "cgpipe"]
 	path = cgpipe
-	url = git@github.com:compgen-io/cgpipe-docs.git
+	url = https://github.com/compgen-io/cgpipe-docs.git
