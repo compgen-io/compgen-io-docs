@@ -1,0 +1,4 @@
+[submodule "cgpipe"]
+	path = cgpipe
+	url = https://github.com/compgen-io/cgpipe-docs.git
+	branch = gh-pages
