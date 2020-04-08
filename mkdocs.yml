@@ -18,6 +18,9 @@ nav:
        - cgpipe: 'cgpipe'
        - 'Command line tutorial': 'cmdline-tutorial'
 
+plugins: []
+
+
 markdown_extensions:
   - toc:
           permalink: []
