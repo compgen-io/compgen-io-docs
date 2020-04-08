@@ -7,6 +7,10 @@ if [ -e site ]; then
     rm -rf site
 fi
 
+if [ $1 != "" ]; then
+git config user.email "noreply@compgen.io"
+git config user.name "Deployment/$GITHUB_ACTOR"
+fi
 git submodule update --remote
 git commit -am 'submodule update'
 
@@ -16,9 +20,6 @@ cp -r ../modules/* .
 rm -rf */.git
 echo "docs.compgen.io" > CNAME
 git init
-
-
-
 
 if [ $1 != "" ]; then
 git config user.email "noreply@compgen.io"
