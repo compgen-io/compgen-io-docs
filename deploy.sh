@@ -9,6 +9,7 @@ fi
 
 ls -las
 ls -las modules
+ls -las modules/*
 
 if [ $1 != "" ]; then
 git config user.email "noreply@compgen.io"
