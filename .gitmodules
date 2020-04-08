@@ -1,8 +1,0 @@
-[submodule "cgpipe"]
-	path = cgpipe
-	url = https://github.com/compgen-io/cgpipe-docs.git
-	branch = gh-pages
-[submodule "cmdline-tutorial"]
-	path = cmdline-tutorial
-	url = https://github.com/compgen-io/cmdline-tutorial.git
-	branch = gh-pages
