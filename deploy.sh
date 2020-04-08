@@ -15,8 +15,14 @@ if [ $1 != "" ]; then
 git config user.email "noreply@compgen.io"
 git config user.name "Deployment/$GITHUB_ACTOR"
 fi
-git submodule update --remote
+
+git submodule sync --recursive
+git submodule update --remote --init --force --recursive
+
 git commit -am 'submodule update'
+
+ls -las modules/*
+
 
 venv/bin/mkdocs build
 cd site
