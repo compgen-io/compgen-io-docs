@@ -10,6 +10,7 @@ venv/bin/mkdocs build
 
 cd site
 cp -r ../modules/* .
+rm -rf */.git
 echo "docs.compgen.io" > CNAME
 git init
 git add .
