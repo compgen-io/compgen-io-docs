@@ -9,11 +9,12 @@ git commit -am 'submodule update'
 venv/bin/mkdocs build
 
 cd site
+cp -r ../modules/* .
 echo "docs.compgen.io" > CNAME
 git init
 git add .
 git commit -m 'deploy'
-git remote add origin git@github.com:compgen-io/compgen-io-docs.git
+git remote add origin https://github.com/compgen-io/compgen-io-docs.git
 git checkout -b gh-pages
 git push --force origin gh-pages
 cd ..
