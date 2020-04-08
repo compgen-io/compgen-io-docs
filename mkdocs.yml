@@ -1,0 +1,46 @@
+site_name: "docs.compgen.io"
+
+theme:
+    name: null
+    custom_dir: 'cinder/cinder'
+extra_css:
+  - "css/style.css"
+
+        #  name: bootstrap4
+#  name: material
+#  palette:
+#    primary: 'blue grey'
+#    accent: 'light blue'
+#  font:
+#    text: 'Helvetica'
+#    code: 'Menlo'
+nav:
+       - cgpipe: 'cgpipe'
+       - 'Command line tutorial': 'cmdline-tutorial'
+
+markdown_extensions:
+  - toc:
+          permalink: []
+          toc_depth: "1-3"
+  - admonition
+  - codehilite
+  - footnotes
+  - attr_list
+  - smarty
+  - pymdownx.arithmatex
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
