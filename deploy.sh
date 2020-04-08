@@ -7,6 +7,8 @@ if [ -e site ]; then
     rm -rf site
 fi
 
+ls -las
+
 if [ $1 != "" ]; then
 git config user.email "noreply@compgen.io"
 git config user.name "Deployment/$GITHUB_ACTOR"
@@ -34,6 +36,9 @@ else
 fi
 git checkout -b gh-pages
 git push --force origin gh-pages
+
+ls -las
+
 cd ..
 rm -rf site
 
