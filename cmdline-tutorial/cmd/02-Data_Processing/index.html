@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <link rel="shortcut icon" href="../../img/favicon.ico">
+
+    
+    <title>Data pipelines - Command-line tutorial&nbsp;&nbsp;</title>
+    
+
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-IIED/eyOkM6ihtOiQsX2zizxFBphgnv1zbe1bKA+njdFzkr6cDNy16jfIKWu4FNH" crossorigin="anonymous">
+
+<!--
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
+-->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css">
+    <link href='//rsms.me/inter/inter.css' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="../../css/base.min.css" rel="stylesheet">
+    <link href="../../css/cinder.min.css" rel="stylesheet">
+
+    
+    <link href="../../css/style.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+        <![endif]-->
+
+    
+
+     
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <a class="nav navbar-logo" href="/"><i class="fas fa-books"></i>&nbsp;&nbsp;docs.compgen.io</a>
+            <a class="navbar-brand" href="../..">Command-line tutorial&nbsp;&nbsp;</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Command-line <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../..">Welcome</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../concepts/">Unix concepts</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../terminal/">Terminal / SSH</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../common/">Common commands</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../transfer/">Tranferring data</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../customizing/">Customizing the shell</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../scripts/">Writing scripts</a>
+</li>
+
+                        
+                            
+<li class="active">
+    <a href="./">Data pipelines</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../otherlinks/">Links</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../../git/">Git</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../../clusters/">Cluster jobs</a>
+                    </li>
+                
+                
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                            <i class="fas fa-search"></i> Search
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="../scripts/">
+                            <i class="fas fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="next" href="../otherlinks/">
+                            Next <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/compgen-io/cmdline-tutorial/edit/master/docs/cmd/02-Data_Processing.md"><i class="fab fa-github"></i> Edit on GitHub</a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div class="container">
+        
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<div class="codehilite"><pre><span></span><code><span class="err">ls -l</span>
+<span class="err">ls ..</span>
+<span class="err">pwd</span>
+<span class="err">ls -las | less</span>
+<span class="err">mkdir tutorial</span>
+<span class="err">cd tutorial/</span>
+<span class="err">ls -las</span>
+<span class="err">touch filename</span>
+<span class="err">ls -las</span>
+<span class="err">cat filename </span>
+<span class="err">echo &quot;&quot; &gt; filename</span>
+<span class="err">ls -la</span>
+<span class="err">cat filename </span>
+<span class="err">rm filename </span>
+<span class="err">ls -l</span>
+<span class="err">touch filename</span>
+<span class="err">mkdir sub-directory</span>
+<span class="err">rmdir sub-directory/</span>
+<span class="err">mkdir sub-directory</span>
+<span class="err">ls -l</span>
+<span class="err">touch sub-directory/newfile</span>
+<span class="err">rmdir sub-directory/</span>
+<span class="err">rm sub-directory/newfile </span>
+<span class="err">rmdir sub-directory/</span>
+<span class="err">mkdir sub-directory</span>
+<span class="err">touch sub-directory/newfile</span>
+<span class="err">touch sub-directory/newfile2</span>
+<span class="err">touch sub-directory/newfile3</span>
+<span class="err">touch sub-directory/newfile4</span>
+<span class="err">ls -l sub-directory/</span>
+<span class="err">rm -r sub-directory/</span>
+<span class="err">ls -l</span>
+<span class="err">rm -r</span>
+<span class="err">ls -l</span>
+<span class="err">mv filename new-filename</span>
+<span class="err">ls -l</span>
+<span class="err">mkdir sub-directory</span>
+<span class="err">mv new-filename sub-directory/</span>
+<span class="err">ls -l</span>
+<span class="err">ls -l sub-directory/</span>
+<span class="err">mv sub-directory/new-filename back_here</span>
+<span class="err">ls -l</span>
+<span class="err">ls -lR</span>
+<span class="err">touch sub-directory/testing2</span>
+<span class="err">ls -lR</span>
+<span class="err">find .</span>
+<span class="err">find sub-directory/</span>
+<span class="err">find . -name &#39;test&#39;</span>
+<span class="err">find . -name &#39;*test*&#39;</span>
+<span class="err">find . -name &#39;test*&#39;</span>
+<span class="err">find . -name &#39;t*&#39;</span>
+<span class="err">find . -name &#39;*2&#39;</span>
+<span class="err">clear</span>
+<span class="err">ls -l back_here </span>
+<span class="err">history</span>
+<span class="err">module avail</span>
+<span class="err">module add tabutils</span>
+<span class="err">tabutils </span>
+<span class="err">module</span>
+<span class="err">cd /asclab/projects/spcg/</span>
+<span class="err">ls -l</span>
+<span class="err">cd reports/</span>
+<span class="err">ls -l</span>
+<span class="err">cd snvs/</span>
+<span class="err">ls -l</span>
+<span class="err">ls -lh</span>
+<span class="err">cd /asclab/projects/spcg/reports/snvs/</span>
+<span class="err">ls -lh</span>
+<span class="err">tabutils </span>
+<span class="err">cat SPCG-UCPG.mutect.filtered.annotated.txt.gz | less</span>
+<span class="err">tabutils less SPCG-UCPG.mutect.filtered.annotated.txt.gz </span>
+<span class="err">ps</span>
+<span class="err">ps eax</span>
+<span class="err">ps eaxu </span>
+<span class="err">ps eaxu  | cs</span>
+<span class="err">ps eaxu  | grep cs</span>
+<span class="err">tabutils less SPCG-UCPG.mutect.filtered.annotated.txt.gz </span>
+<span class="err">gunzip </span>
+<span class="err">gunzip  -help</span>
+<span class="err">gunzip -c SPCG-UCPG.mutect.filtered.annotated.txt.gz | grep -v &#39;^#&#39; | less</span>
+<span class="err">gunzip -c SPCG-UCPG.mutect.filtered.annotated.txt.gz | grep -v &#39;^#&#39; | less -S </span>
+<span class="err">gunzip -c SPCG-UCPG.mutect.filtered.annotated.txt.gz | grep -v &#39;^#&#39; | tabutils less</span>
+<span class="err">gunzip -c SPCG-UCPG.mutect.filtered.annotated.txt.gz | grep -v &#39;^#&#39; | grep &#39;OS    | tabutils less</span>
+<span class="err">cd /asclab/projects/spcg/subjects/*186</span>
+<span class="err">ls -l</span>
+<span class="err">cd SPCG-OS186_6G_14M</span>
+<span class="err">pwd</span>
+<span class="err">cd /asclab/projects/spcg/subjects/*186/*G_14M</span>
+<span class="err">ls -l</span>
+<span class="err">ps -eax</span>
+<span class="err">ps -eaxu |  cs</span>
+<span class="err">ps -eaxu |  grep cs</span>
+<span class="err">pwd</span>
+<span class="err">cd /asclab/projects/spcg/subjects/*186/*G_14M</span>
+<span class="err">ls -l</span>
+<span class="err">ls -l /asclab/projects/spcg/subjects/</span>
+<span class="err">ls -l /asclab/projects/spcg/subjects/ | less</span>
+<span class="err">ls -l</span>
+<span class="err">pwd</span>
+<span class="err">ls -l</span>
+<span class="err">ls </span>
+<span class="err">ls -l </span>
+<span class="err">cd variants</span>
+<span class="err">ls -l</span>
+<span class="err">pwd</span>
+<span class="err">tabutils less *txt.gz</span>
+<span class="err">ls *txt.gz</span>
+<span class="err">cat SPCG-OS186_6G_14M.mutect.filtered.tstv.txt</span>
+<span class="err">cat *tstv.txt</span>
+<span class="err">less SPCG-OS186_6G_14M.mutect.filtered.annotated.bed</span>
+<span class="err">tabutils less SPCG-OS186_6G_14M.mutect.filtered.annotated.txt.gz</span>
+<span class="err">gunzip -c SPCG-OS186_6G_14M.mutect.filtered.annotated.txt.gz | less</span>
+<span class="err">gunzip -c SPCG-OS186_6G_14M.mutect.filtered.annotated.txt.gz | grep -v &#39;^#&#39; | less</span>
+<span class="err">gunzip -c SPCG-OS186_6G_14M.mutect.filtered.annotated.txt.gz | grep -v &#39;^#&#39; | wc </span>
+<span class="err">gunzip -c SPCG-OS186_6G_14M.mutect.filtered.annotated.txt.gz | grep -v &#39;^#&#39; | wc -l</span>
+<span class="err">gunzip -c SPCG-OS186_6G_14M.mutect.filtered.annotated.txt.gz | grep -v &#39;^#&#39; | grep &#39;EXON&#39; | tabutils less</span>
+<span class="err">gunzip -c SPCG-OS186_6G_14M.mutect.filtered.annotated.txt.gz | grep -v &#39;^#&#39; | grep &#39;EXON&#39; | wc -l</span>
+<span class="err">gunzip -c SPCG-OS186_6G_14M.mutect.filtered.annotated.txt.gz | grep -v &#39;^#&#39; | grep &#39;EXON&#39; | grep &#39;HIGH&#39; | tabutils less</span>
+<span class="err">gunzip -c SPCG-OS186_6G_14M.mutect.filtered.annotated.txt.gz | grep -v &#39;^#&#39; | grep &#39;EXON&#39; | grep &#39;CANCER&#39; | tabutils less</span>
+<span class="err">tabutils less SPCG-OS186_6G_14M.mutect.filtered.annotated.txt.gz</span>
+<span class="err">gunzip -c SPCG-OS186_6G_14M.mutect.filtered.annotated.txt.gz | grep -v &#39;^#&#39; | less -S</span>
+<span class="err">cat *tstv.txt</span>
+<span class="err">grep Ts *tstv.txt</span>
+<span class="err">grep EXON *txt.gz</span>
+<span class="err">gunzip -c SPCG-OS186_6G_14M.mutect.filtered.annotated.txt.gz | grep -v &#39;^#&#39; | tabutils less </span>
+<span class="err">gunzip -c SPCG-OS186_6G_14M.mutect.filtered.annotated.txt.gz | grep -v &#39;^#&#39; | awk &#39;{print $1}&#39; | less</span>
+<span class="err">gunzip -c SPCG-OS186_6G_14M.mutect.filtered.annotated.txt.gz | grep -v &#39;^#&#39; | awk &#39;{print $1}&#39; | uniq</span>
+<span class="err">gunzip -c SPCG-OS186_6G_14M.mutect.filtered.annotated.txt.gz | grep -v &#39;^#&#39; | awk &#39;{print $1}&#39; | uniq -c</span>
+<span class="err">gunzip -c SPCG-OS186_6G_14M.mutect.filtered.annotated.txt.gz | grep &#39;TP53&#39; | less</span>
+<span class="err">gunzip -c SPCG-OS186_6G_14M.mutect.filtered.annotated.txt.gz | grep &#39;TP53&#39; | tabutils less</span>
+</code></pre></div></div>
+        
+        
+    </div>
+
+    <footer class="col-md-12 text-center">
+        
+        <hr>
+        <p>
+        <!--
+		<small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</small>
+	-->
+	</p>
+
+        
+        
+    </footer>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../../js/bootstrap-3.0.3.min.js"></script>
+    
+    <script>var base_url = "../.."</script>
+    
+    <script src="../../js/base.js"></script>
+    <script src="../../search/main.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+    </body>
+
+</html>

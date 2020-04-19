@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <link rel="shortcut icon" href="../../img/favicon.ico">
+
+    
+    <title>Common commands - Command-line tutorial&nbsp;&nbsp;</title>
+    
+
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-IIED/eyOkM6ihtOiQsX2zizxFBphgnv1zbe1bKA+njdFzkr6cDNy16jfIKWu4FNH" crossorigin="anonymous">
+
+<!--
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
+-->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css">
+    <link href='//rsms.me/inter/inter.css' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="../../css/base.min.css" rel="stylesheet">
+    <link href="../../css/cinder.min.css" rel="stylesheet">
+
+    
+    <link href="../../css/style.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+        <![endif]-->
+
+    
+
+     
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <a class="nav navbar-logo" href="/"><i class="fas fa-books"></i>&nbsp;&nbsp;docs.compgen.io</a>
+            <a class="navbar-brand" href="../..">Command-line tutorial&nbsp;&nbsp;</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Command-line <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../..">Welcome</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../concepts/">Unix concepts</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../terminal/">Terminal / SSH</a>
+</li>
+
+                        
+                            
+<li class="active">
+    <a href="./">Common commands</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../transfer/">Tranferring data</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../customizing/">Customizing the shell</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../scripts/">Writing scripts</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../02-Data_Processing/">Data pipelines</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../otherlinks/">Links</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../../git/">Git</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../../clusters/">Cluster jobs</a>
+                    </li>
+                
+                
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                            <i class="fas fa-search"></i> Search
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="../terminal/">
+                            <i class="fas fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="next" href="../transfer/">
+                            Next <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/compgen-io/cmdline-tutorial/edit/master/docs/cmd/common.md"><i class="fab fa-github"></i> Edit on GitHub</a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div class="container">
+        
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="first-level active"><a href="#tips-and-tricks">Tips and tricks</a></li>
+            <li class="second-level"><a href="#history">History</a></li>
+                
+            <li class="second-level"><a href="#tab-completion">Tab completion</a></li>
+                
+            <li class="second-level"><a href="#file-globs">File globs</a></li>
+                
+        <li class="first-level "><a href="#navigating-the-file-system">Navigating the file system</a></li>
+            <li class="second-level"><a href="#listing-files">Listing files</a></li>
+                
+            <li class="second-level"><a href="#changing-directories">Changing directories</a></li>
+                
+            <li class="second-level"><a href="#absolute-vs-relative-pathnames">Absolute vs relative pathnames</a></li>
+                
+        <li class="first-level "><a href="#markdown">Files and directories</a></li>
+            <li class="second-level"><a href="#directories">Directories</a></li>
+                
+            <li class="second-level"><a href="#files">Files</a></li>
+                
+            <li class="second-level"><a href="#permissions">Permissions</a></li>
+                
+        <li class="first-level "><a href="#file-streams">File streams</a></li>
+        <li class="first-level "><a href="#pipes">Pipes</a></li>
+        <li class="first-level "><a href="#process-control">Process control</a></li>
+        <li class="first-level "><a href="#miscellaneous-commands">Miscellaneous commands</a></li>
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<h1>Common commands</h1>
+
+<p>The command-line consists of a command-prompt and then output from the command. These are some of the more common commands you&rsquo;ll use when trying to navigate and work with a Unix/Linux server.</p>
+<p>Before you use these though, you should make sure that you understand some of these <a href="../concepts/">Unix concepts</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Below, when you see a <code>$</code>, this is a command-prompt. This is where you&rsquo;d type an instruction on the command line for the computer to do. This is a simple prompt and yours will probably look a little more complicated. In fact, it may look more like this:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">username@server:~$</span>
+</code></pre></div>
+
+
+<p>The only difference between the two forms is that the later includes a little more information (and how to change yours is covered in the <a href="../customizing/#prompt">customization</a> section). The key thing to know is that anything after the <code>$</code> is where you type. In order to execute the command, hit the <code>return ↵</code>  or <code>enter ↵</code>  key.</p>
+</div>
+<h2 id="tips-and-tricks">Tips and tricks</h2>
+<h3 id="history">History</h3>
+<p>When you are typing commands, you will often want to repeat or edit an earlier command. In most shells, you can browse your earlier commands by using your <code>up ↑</code> and <code>down ↓</code>  arrow keys. You can then move the cursor left and right to edit your command as necessary.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Your entire command history is stored for you in either <code>$HOME/.bash_history</code> or <code>$HOME/.zsh_history</code>, depending on the shell you are using (see <a href="customization.md">customizing</a> for more information).</p>
+</div>
+<h3 id="tab-completion">Tab completion</h3>
+<p>There are many times when you want to do something to a specific file, but don&rsquo;t want to type a full name. In this case, you can often use <code>tab ⇥</code> completion. If you type the first few letters of a file, you can hit the <code>tab ⇥</code> key and the shell will finish the rest of the name or command for you. If there is any ambiguity in a name, the shell will complete as much of the name for you as it can. This is a handy shortcut that can save you a lot of typing.</p>
+<h3 id="file-globs">File globs</h3>
+<p>Another way to save some time is to use a file glob instead of typing a full filename. For example, if you have a bunch of text files (all ending in <code>.txt</code>) that you wanted to copy to a new directory (<code>dest</code>), you could type all of the file names one-by-one, or you could use a file glob. A glob is a wildcard character that allow for quick pattern matching when entering filenames.</p>
+<p>So, in the above example, instead of typing this following:</p>
+<div class="codehilite"><pre><span></span><code>$ cp a.txt b.txt c.txt d.txt ... dest/
+</code></pre></div>
+
+
+<p>You could type this:</p>
+<div class="codehilite"><pre><span></span><code>$ cp *.txt dest/
+</code></pre></div>
+
+
+<p>There are two globs you can use: </p>
+<ul>
+<li><code>*</code> means zero or more of any character. This can be a bit deceiving, because it will also match &ldquo;zero&rdquo; wildcard characters. So be careful!</li>
+<li><code>?</code> means one (and only one) wildcard character.</li>
+</ul>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>Typos with file globs can lead to deletion of all of your files if you aren&rsquo;t careful! There is a big difference between <code>rm *txt</code> and <code>rm * txt</code>.  The first deletes all text files. The second deletes <strong>all</strong> files and the file named <code>txt</code>. So, be careful with spaces!</p>
+</div>
+<h2 id="navigating-the-file-system">Navigating the file system</h2>
+<p>Listing files in the current directory is performed using the <code>ls</code> command.
+<code>ls</code> has many options. By default, the sort order of the files is alphabetical, with capital letters first, then lowercase letters (A-Za-z).
+A few of the more common arguments are listed below.</p>
+<h3 id="listing-files">Listing files</h3>
+<p>Listing files in the current directory</p>
+<div class="codehilite"><pre><span></span><code>$ ls
+file1    file2    file3    file4
+</code></pre></div>
+
+
+<p>Listing the long version&hellip; <code>ls -l</code></p>
+<div class="codehilite"><pre><span></span><code>$ ls -l
+-rw-r--r--  <span class="m">1</span> mbreese  staff  <span class="m">0</span> Mar <span class="m">31</span> <span class="m">16</span>:31 file1
+-rw-r--r--  <span class="m">1</span> mbreese  staff  <span class="m">0</span> Mar <span class="m">31</span> <span class="m">16</span>:31 file2
+-rw-r--r--  <span class="m">1</span> mbreese  staff  <span class="m">0</span> Mar <span class="m">31</span> <span class="m">16</span>:31 file3
+-rw-r--r--  <span class="m">1</span> mbreese  staff  <span class="m">0</span> Mar <span class="m">31</span> <span class="m">16</span>:31 file4
+</code></pre></div>
+
+
+<p>What does all of this mean? Let&rsquo;s look at each column&hellip;</p>
+<ul>
+<li>
+<p>Permissions<br />
+    This is probably the most foreign of the fields above. </p>
+<p>The first character shows if the file is a file or a directory. If this is a directory (see below for an example), then this character will be a <code>d</code>. Otherwise, it is a hyphen <code>-</code>.</p>
+<p>Next, the fields shows the access level that that each user on the system has to this file. There are 3 main types of permissions:</p>
+<ul>
+<li><strong>r</strong> - read  <em>(can the user read the file?)</em></li>
+<li><strong>w</strong> - write  <em>(can the user write to the file?)</em></li>
+<li><strong>x</strong> - execute  <em>(can the user run this as a program?)</em></li>
+</ul>
+<p>These values are shown in three sets of triplets. The first triplet shows the user (<em>u</em>) permissions. This shows the permissions for the <em>owner</em>. The next is the group (<em>g</em>) permissions. Finally the permissions for all other users (<em>o</em>). We&rsquo;ll cover <a href="#file-permissions">how to set and change these permissions</a> further down, but for now, you just need to know that this is what the <code>rwx</code> stand for.</p>
+</li>
+<li>
+<p>Links<br />
+    This is the number of references to this file in the filesystem. This will almost always be 1, and can be safely ignored for now.</p>
+</li>
+<li>
+<p>Owner<br />
+    This is the username for the user who is listed as the owner of this file. By default they are the user that can set the permissions for other users.</p>
+</li>
+<li>
+<p>Group<br />
+    This is the group that is the group owner for a file. Users can belong to more than one group, which makes this a good mechanism for sharing data with others.</p>
+</li>
+<li>
+<p>Size</p>
+</li>
+<li>Modified date</li>
+<li>Filename</li>
+</ul>
+<p>Listing all files (including hidden files). Any file that starts with a <code>'.'</code> will be hidden by default. Many programs will write to files that start with a <code>'.'</code> to save configuration or temporary data. All directories
+contain two directories by default <code>'.'</code> and <code>'..'</code>. <code>'.'</code> is the same as the current directory. So, in the below case <code>file1</code> and <code>./file1</code> point to the exact same file. <code>'..'</code> is the same as the parent directory (up the file hierarchy). <code>'.'</code> and <code>'..'</code> are also considered hidden files.</p>
+<div class="codehilite"><pre><span></span><code>$ ls -la
+drwxr-xr-x   <span class="m">6</span> mbreese  staff   <span class="m">192</span> Mar <span class="m">31</span> <span class="m">16</span>:31 .
+drwxr-xr-x  <span class="m">38</span> mbreese  staff  <span class="m">1216</span> Mar <span class="m">31</span> <span class="m">16</span>:30 ..
+-rw-r--r--   <span class="m">1</span> mbreese  staff     <span class="m">0</span> Mar <span class="m">31</span> <span class="m">16</span>:33 .hidden_file
+-rw-r--r--   <span class="m">1</span> mbreese  staff     <span class="m">0</span> Mar <span class="m">31</span> <span class="m">16</span>:31 file1
+-rw-r--r--   <span class="m">1</span> mbreese  staff     <span class="m">0</span> Mar <span class="m">31</span> <span class="m">16</span>:31 file2
+-rw-r--r--   <span class="m">1</span> mbreese  staff     <span class="m">0</span> Mar <span class="m">31</span> <span class="m">16</span>:31 file3
+-rw-r--r--   <span class="m">1</span> mbreese  staff     <span class="m">0</span> Mar <span class="m">31</span> <span class="m">16</span>:31 file4
+</code></pre></div>
+
+
+<p>Here are some other <code>ls</code> options:</p>
+<table>
+<thead>
+<tr>
+<th>Arg</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-a</td>
+<td>Show all files</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>Long display (permissions, owner, group, size, date)</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td></td>
+</tr>
+<tr>
+<td>-1</td>
+<td>show only one file per line (without the &lsquo;long&rsquo; information)</td>
+</tr>
+<tr>
+<td>-h</td>
+<td>human readable file sizes (K, M, G)</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>sort by time (newest to oldest)</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>reverse the sort (z-aZ-A or oldest to newest)</td>
+</tr>
+<tr>
+<td>-R</td>
+<td>recursively display files (display this directory, and all sub-directories)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="changing-directories">Changing directories</h3>
+<p>Changing to a new directory</p>
+<div class="codehilite"><pre><span></span><code>$ <span class="nb">cd</span> new_directory
+</code></pre></div>
+
+
+<p>Changing to the parent directory (up a level)  </p>
+<div class="codehilite"><pre><span></span><code>$ <span class="nb">cd</span> ..
+</code></pre></div>
+
+
+<p><em>&ldquo;<code>..</code>&rdquo; is one of those hidden files, but it is present in every directory, and it always means the parent directory</em></p>
+<p>Changing to the root directory (this is the highest level)  </p>
+<div class="codehilite"><pre><span></span><code>$ <span class="nb">cd</span> /
+</code></pre></div>
+
+
+<p>Changing to your home directory (any of these work)</p>
+<div class="codehilite"><pre><span></span><code>$ <span class="nb">cd</span>
+$ <span class="nb">cd</span> ~
+$ <span class="nb">cd</span> <span class="nv">$HOME</span>
+</code></pre></div>
+
+
+<h3 id="absolute-vs-relative-pathnames">Absolute vs relative pathnames</h3>
+<p><em>Work in progress</em></p>
+<h2 id="markdown">Working with files and directories</h2>
+<p>Print your current working directory</p>
+<div class="codehilite"><pre><span></span><code>$ <span class="nb">pwd</span>
+/home/username
+</code></pre></div>
+
+
+<h3 id="directories">Directories</h3>
+<p>Creating a directory</p>
+<div class="codehilite"><pre><span></span><code>$ mkdir new_directory
+</code></pre></div>
+
+
+<p>Removing a directory</p>
+<div class="codehilite"><pre><span></span><code>$ rmdir bad_directory
+</code></pre></div>
+
+
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>You can remove only empty directories this way. If the directory has files in it, you need to remove the files first. Alternatively you can use this command to remove both the files and the directory:</p>
+<div class="codehilite"><pre><span></span><code>$ rm -r bad_directory_with_files
+</code></pre></div>
+
+
+<p>But be careful &ndash; one wrong finger and you could delete months worth of work. It&rsquo;s always better to test things out first, before running <code>rm -r</code>.</p>
+</div>
+<h3 id="files">Files</h3>
+<div class="codehilite"><pre><span></span><code><span class="err">cp src dest</span>
+<span class="err">mv srv dest</span>
+<span class="err">rm file</span>
+</code></pre></div>
+
+
+<h3 id="permissions">Permissions</h3>
+<h2 id="file-streams">File streams</h2>
+<h2 id="pipes">Pipes</h2>
+<h2 id="process-control">Process control</h2>
+<h2 id="miscellaneous-commands">Miscellaneous commands</h2>
+<p>Change your password</p>
+<div class="codehilite"><pre><span></span><code>$ passwd
+&lt;Prompt <span class="k">for</span> your current password&gt;
+&lt;Prompt <span class="k">for</span> your new password&gt;
+&lt;Repeat new password&gt;
+</code></pre></div>
+
+
+<p>Print out the date/time</p>
+<div class="codehilite"><pre><span></span><code>$ date
+Tue Mar <span class="m">31</span> <span class="m">16</span>:28:20 EDT <span class="m">2020</span>
+</code></pre></div>
+
+
+<p>Clear the screen</p>
+<div class="codehilite"><pre><span></span><code>$ clear
+</code></pre></div>
+
+
+<p>What is your username?<br />
+<em>(This is more helpful in the context of scripts, but still good to know)</em></p>
+<div class="codehilite"><pre><span></span><code>$ whoami
+my_username
+</code></pre></div>
+
+
+<p>Write something to the screen</p>
+<div class="codehilite"><pre><span></span><code>$ <span class="nb">echo</span> <span class="s2">&quot;Hello&quot;</span>
+Hello
+</code></pre></div>
+
+
+<p>You can also write variables, like $SHELL</p>
+<div class="codehilite"><pre><span></span><code>$ <span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$SHELL</span><span class="s2">&quot;</span>
+/bin/bash
+</code></pre></div>
+
+
+<p>Or put them together into one line&hellip;</p>
+<div class="codehilite"><pre><span></span><code>$ <span class="nb">echo</span> <span class="s2">&quot;My shell is: </span><span class="nv">$SHELL</span><span class="s2">&quot;</span>
+My shell is /bin/bash
+</code></pre></div>
+
+
+<p>Calculate an MD5 hash of a file</p>
+<div class="codehilite"><pre><span></span><code><span class="err">md5 file.txt</span>
+</code></pre></div>
+
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is useful when comparing two files to see if something changed or a file you&rsquo;ve downloaded from a remote server.  <code>MD5</code> is an algorithm that takes in a set of data (bytes) and generates a signature. This signature is a fixed size, but will be very different between two different inputs. The algorithm is designed so that any change in the input (as small as one bit) will result in a large difference in the signature.</p>
+<p><code>SHA1</code> is another algorithm that is commonly used for this purpose.</p>
+<p>These are a family of algorithms called one-way hashes. You feed data in one way and get a hash signature out the other. However, there no going the other way &ndash; you can&rsquo;t (easily) feed in a signature and recover what bits were used to generate that signature.</p>
+</div></div>
+        
+        
+    </div>
+
+    <footer class="col-md-12 text-center">
+        
+        <hr>
+        <p>
+        <!--
+		<small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</small>
+	-->
+	</p>
+
+        
+        
+    </footer>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../../js/bootstrap-3.0.3.min.js"></script>
+    
+    <script>var base_url = "../.."</script>
+    
+    <script src="../../js/base.js"></script>
+    <script src="../../search/main.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+    </body>
+
+</html>

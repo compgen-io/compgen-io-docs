@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <link rel="shortcut icon" href="../../img/favicon.ico">
+
+    
+    <title>Customizing the shell - Command-line tutorial&nbsp;&nbsp;</title>
+    
+
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-IIED/eyOkM6ihtOiQsX2zizxFBphgnv1zbe1bKA+njdFzkr6cDNy16jfIKWu4FNH" crossorigin="anonymous">
+
+<!--
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
+-->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css">
+    <link href='//rsms.me/inter/inter.css' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="../../css/base.min.css" rel="stylesheet">
+    <link href="../../css/cinder.min.css" rel="stylesheet">
+
+    
+    <link href="../../css/style.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+        <![endif]-->
+
+    
+
+     
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <a class="nav navbar-logo" href="/"><i class="fas fa-books"></i>&nbsp;&nbsp;docs.compgen.io</a>
+            <a class="navbar-brand" href="../..">Command-line tutorial&nbsp;&nbsp;</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Command-line <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../..">Welcome</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../concepts/">Unix concepts</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../terminal/">Terminal / SSH</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../common/">Common commands</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../transfer/">Tranferring data</a>
+</li>
+
+                        
+                            
+<li class="active">
+    <a href="./">Customizing the shell</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../scripts/">Writing scripts</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../02-Data_Processing/">Data pipelines</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../otherlinks/">Links</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../../git/">Git</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../../clusters/">Cluster jobs</a>
+                    </li>
+                
+                
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                            <i class="fas fa-search"></i> Search
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="../transfer/">
+                            <i class="fas fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="next" href="../scripts/">
+                            Next <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/compgen-io/cmdline-tutorial/edit/master/docs/cmd/customizing.md"><i class="fab fa-github"></i> Edit on GitHub</a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div class="container">
+        
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="first-level active"><a href="#customizing-your-shell">Customizing your shell</a></li>
+            <li class="second-level"><a href="#bashrc">.bashrc</a></li>
+                
+                <li class="third-level"><a href="#path">Path</a></li>
+            <li class="second-level"><a href="#aliases">Aliases</a></li>
+                
+            <li class="second-level"><a href="#prompt">Prompt</a></li>
+                
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<h1 id="customizing-your-shell">Customizing your shell</h1>
+<p>The shell is just another program that runs to manage your command-line access. In fact, the command prompt you use is basicall treated like a <a href="../concepts/#scripts">shell script</a> where each line executed as it is being written. Because of this, it is highly customizable.</p>
+<p>If you&rsquo;re using the <code>bash</code> shell (and this is the default on many systems), 
+then you can edit the file <code>$HOME/.bashrc</code> to customize your shell.</p>
+<p>Another common shell is <code>zsh</code> (the new default on macOS). If you are using this shell,
+then you can edit the file <code>$HOME/.zshrc</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There are a few zsh special functions, but zsh can be considered a close relative of bash. Most (all?) of the commands from bash will work in zsh (but not vice-versa).</p>
+</div>
+<h4>How do you find out which one you&rsquo;re using?</h4>
+<p>There are a few methods, but the easiest is to run this snippet:</p>
+<div class="codehilite"><pre><span></span><code>$ <span class="nb">echo</span> <span class="nv">$SHELL</span>
+</code></pre></div>
+
+
+<p>It will print out the exact program that you are currently using for your shell. So long as you are
+using either bash or zsh, this page will work for you. If you have a different shell (csh, tcsh, etc),
+then you&rsquo;re on your own. 😀</p>
+<h2 id="bashrc"><code>.bashrc</code></h2>
+<p>This is a tiny bit of bash code that gets run whenever you start a new session, whether that be because you login to the system (for remote access) or if you open a new Terminal window on your local machine. It is common to put any changes to the default bash environment in this file.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There are a few configuration files available to users to adjust the bash environment. These are all included at different times, so it can be a bit confusing as to which file to edit. However, <code>$HOME/.bashrc</code> is almost always the included, so if you start here, it will almost always work!</p>
+</div>
+<h3 id="path">Path</h3>
+<p>The <code>$PATH</code> setting determines where bash will look for programs. For example, most of the command-line programs the OS provides are located in either <code>/bin</code> or <code>/usr/bin</code>. So, if you want to run the <code>date</code> program, bash will check each directory in your <code>$PATH</code> to see if it contains an executable program called <code>date</code>. This is the most common setting you&rsquo;ll want to adjust to customize your shell.</p>
+<p><code>$PATH</code> is a colon (<code>:</code>) delimited variable that contains a list of these directories to check.</p>
+<p>For example, here is a common <code>$PATH</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">PATH=/bin:/usr/bin:$HOME/local/bin</span>
+</code></pre></div>
+
+
+<p>You can see your path if you print this variable:</p>
+<div class="codehilite"><pre><span></span><code>$ <span class="nb">echo</span> <span class="nv">$PATH</span>
+</code></pre></div>
+
+
+<p>If you want to add a directory to your <code>$PATH</code>, you can add this line to your <code>$HOME/.bashrc</code> file:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">export PATH=$PATH:/new/dir</span>
+</code></pre></div>
+
+
+<p>What this does is set the variable <code>$PATH</code> equal to <code>$PATH:/new/dir</code>, which is to say, the old <code>$PATH</code> plus the directory <code>/new/dir</code>. The command <code>export</code> tells bash that this variable should be included in the environment, instead of a variable that is local to only the script being executed. For the purposes of setting the <code>$PATH</code> variable, you almost always want to export it as opposed to just setting it.</p>
+<h2 id="aliases">Aliases</h2>
+<h2 id="prompt">Prompt</h2></div>
+        
+        
+    </div>
+
+    <footer class="col-md-12 text-center">
+        
+        <hr>
+        <p>
+        <!--
+		<small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</small>
+	-->
+	</p>
+
+        
+        
+    </footer>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../../js/bootstrap-3.0.3.min.js"></script>
+    
+    <script>var base_url = "../.."</script>
+    
+    <script src="../../js/base.js"></script>
+    <script src="../../search/main.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+    </body>
+
+</html>

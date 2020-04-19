@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    
+    <title>Common - Command-line tutorial&nbsp;&nbsp;</title>
+    
+
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-IIED/eyOkM6ihtOiQsX2zizxFBphgnv1zbe1bKA+njdFzkr6cDNy16jfIKWu4FNH" crossorigin="anonymous">
+
+<!--
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
+-->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css">
+    <link href='//rsms.me/inter/inter.css' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="../css/base.min.css" rel="stylesheet">
+    <link href="../css/cinder.min.css" rel="stylesheet">
+
+    
+    <link href="../css/style.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+        <![endif]-->
+
+    
+
+     
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <a class="nav navbar-logo" href="/"><i class="fas fa-books"></i>&nbsp;&nbsp;docs.compgen.io</a>
+            <a class="navbar-brand" href="..">Command-line tutorial&nbsp;&nbsp;</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Command-line <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="..">Welcome</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../cmd/concepts/">Unix concepts</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../cmd/terminal/">Terminal / SSH</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../cmd/common/">Common commands</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../cmd/transfer/">Tranferring data</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../cmd/customizing/">Customizing the shell</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../cmd/scripts/">Writing scripts</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../cmd/02-Data_Processing/">Data pipelines</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../cmd/otherlinks/">Links</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../git/">Git</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../clusters/">Cluster jobs</a>
+                    </li>
+                
+                
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                            <i class="fas fa-search"></i> Search
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/compgen-io/cmdline-tutorial/edit/master/docs/common.md"><i class="fab fa-github"></i> Edit on GitHub</a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div class="container">
+        
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="first-level active"><a href="#navigating-the-file-system">Navigating the file system</a></li>
+        <li class="first-level "><a href="#file-streams">File streams</a></li>
+        <li class="first-level "><a href="#pipes">Pipes</a></li>
+        <li class="first-level "><a href="#miscellaneous-commands">Miscellaneous commands</a></li>
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<h1>Common commands</h1>
+
+<p>The command-line consists of a command-prompt and then output from the command.</p>
+<h2 id="navigating-the-file-system">Navigating the file system</h2>
+<p>Listing files in the current directory is performed using the <code>ls</code> command.
+<code>ls</code> has many options. By default, the sort order of the files is alphabetical, with capital letters first, then lowercase letters (A-Za-z).
+A few of the more common arguments are listed below.</p>
+<p>Listing files in the current directory</p>
+<div class="codehilite"><pre><span></span><code>$ ls
+file1    file2    file3    file4
+</code></pre></div>
+
+
+<p>Listing the long version&hellip; <code>ls -l</code></p>
+<div class="codehilite"><pre><span></span><code>$ ls -l
+-rw-r--r--  <span class="m">1</span> mbreese  staff  <span class="m">0</span> Mar <span class="m">31</span> <span class="m">16</span>:31 file1
+-rw-r--r--  <span class="m">1</span> mbreese  staff  <span class="m">0</span> Mar <span class="m">31</span> <span class="m">16</span>:31 file2
+-rw-r--r--  <span class="m">1</span> mbreese  staff  <span class="m">0</span> Mar <span class="m">31</span> <span class="m">16</span>:31 file3
+-rw-r--r--  <span class="m">1</span> mbreese  staff  <span class="m">0</span> Mar <span class="m">31</span> <span class="m">16</span>:31 file4
+
+<span class="o">(</span>permissions<span class="o">)</span>
+            <span class="o">(</span>links<span class="o">)</span>                          <span class="o">(</span>filename<span class="o">)</span>
+              <span class="o">(</span>owner<span class="o">)</span>  <span class="o">(</span>group<span class="o">)</span>  <span class="o">(</span>Modified date<span class="o">)</span>
+                              <span class="o">(</span>size in bytes<span class="o">)</span>
+</code></pre></div>
+
+
+<p>Listing all files (including hidden files). Any file that starts with a <code>'.'</code> will be hidden by default. Many programs will write to files that start with a <code>'.'</code> to save configuration or temporary data. All directories
+contain two directories by default <code>'.'</code> and <code>'..'</code>. <code>'.'</code> is the same as the current directory. So, in the below case <code>file1</code> and <code>./file1</code> point to the exact same file. <code>'..'</code> is the same as the parent directory (up the file hierarchy). <code>'.'</code> and <code>'..'</code> are also considered hidden files.</p>
+<div class="codehilite"><pre><span></span><code>$ ls -la
+drwxr-xr-x   <span class="m">6</span> mbreese  staff   <span class="m">192</span> Mar <span class="m">31</span> <span class="m">16</span>:31 .
+drwxr-xr-x  <span class="m">38</span> mbreese  staff  <span class="m">1216</span> Mar <span class="m">31</span> <span class="m">16</span>:30 ..
+-rw-r--r--   <span class="m">1</span> mbreese  staff     <span class="m">0</span> Mar <span class="m">31</span> <span class="m">16</span>:33 .hidden_file
+-rw-r--r--   <span class="m">1</span> mbreese  staff     <span class="m">0</span> Mar <span class="m">31</span> <span class="m">16</span>:31 file1
+-rw-r--r--   <span class="m">1</span> mbreese  staff     <span class="m">0</span> Mar <span class="m">31</span> <span class="m">16</span>:31 file2
+-rw-r--r--   <span class="m">1</span> mbreese  staff     <span class="m">0</span> Mar <span class="m">31</span> <span class="m">16</span>:31 file3
+-rw-r--r--   <span class="m">1</span> mbreese  staff     <span class="m">0</span> Mar <span class="m">31</span> <span class="m">16</span>:31 file4
+</code></pre></div>
+
+
+<p>Here are some other <code>ls</code> options:</p>
+<table>
+<thead>
+<tr>
+<th>Arg</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-a</td>
+<td>Show all files</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>Long display (permissions, owner, group, size, date)</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td></td>
+</tr>
+<tr>
+<td>-1</td>
+<td>show only one file per line (without the &lsquo;long&rsquo; information)</td>
+</tr>
+<tr>
+<td>-h</td>
+<td>human readable file sizes (K, M, G)</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>sort by time (newest to oldest)</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>reverse the sort (z-aZ-A or oldest to newest)</td>
+</tr>
+<tr>
+<td>-R</td>
+<td>recursively display files (display this directory, and all sub-directories)</td>
+</tr>
+</tbody>
+</table>
+<p>Creating a directory</p>
+<div class="codehilite"><pre><span></span><code>$ mkdir new_directory
+</code></pre></div>
+
+
+<p>Changing directories</p>
+<div class="codehilite"><pre><span></span><code>$ <span class="nb">cd</span> new_directory
+</code></pre></div>
+
+
+<p>Changing to the parent directory (up a level)  </p>
+<div class="codehilite"><pre><span></span><code>$ <span class="nb">cd</span> ..
+</code></pre></div>
+
+
+<p><em>&ldquo;<code>..</code>&rdquo; is one of those hidden files, but it is present in every directory, and it always means the parent directory</em></p>
+<p>Removing a directory</p>
+<div class="codehilite"><pre><span></span><code>$ rmdir bad_directory
+</code></pre></div>
+
+
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>You can remove only empty directories this way. If the directory has files in it, you need to remove the files first. Alternatively you can use this command to remove both the files and the directory:</p>
+<div class="codehilite"><pre><span></span><code>$ rm -r bad_directory_with_files
+</code></pre></div>
+
+
+<p>But be careful &ndash; one wrong finger and you could delete months worth of work. It&rsquo;s always better to test things out first, before running <code>rm -r</code>.</p>
+</div>
+<h2 id="file-streams">File streams</h2>
+<h2 id="pipes">Pipes</h2>
+<h2 id="miscellaneous-commands">Miscellaneous commands</h2>
+<p>Change your password</p>
+<div class="codehilite"><pre><span></span><code>$ passwd
+&lt;Prompt <span class="k">for</span> your current password&gt;
+&lt;Prompt <span class="k">for</span> your new password&gt;
+&lt;Repeat new password&gt;
+</code></pre></div>
+
+
+<p>Print out the date/time</p>
+<div class="codehilite"><pre><span></span><code>$ date
+Tue Mar <span class="m">31</span> <span class="m">16</span>:28:20 EDT <span class="m">2020</span>
+</code></pre></div>
+
+
+<p>Clear the screen</p>
+<div class="codehilite"><pre><span></span><code>$ clear
+</code></pre></div>
+
+
+<p>What is your username?<br />
+<em>(This is more helpful in the context of scripts, but still good to know)</em></p>
+<div class="codehilite"><pre><span></span><code>$ whoami
+my_username
+</code></pre></div>
+
+
+<p>Writes the phrase &ldquo;Hello World&rdquo; to the terminal</p>
+<div class="codehilite"><pre><span></span><code><span class="err">echo &quot;Hello World&quot;</span>
+<span class="err">echo &quot;a;lksdjfl;aksdjf;lkjsdf&quot;</span>
+<span class="err">echo &quot;world&quot;</span>
+<span class="err">pwd</span>
+<span class="err">ls</span>
+<span class="err">ls</span>
+<span class="err">ls -l</span>
+<span class="err">mkdir new_dir</span>
+<span class="err">ls -l</span>
+<span class="err">cd new_dir</span>
+<span class="err">ls -l</span>
+<span class="err">ls -las</span>
+<span class="err">ls -l .</span>
+<span class="err">ls -la .</span>
+<span class="err">ls -la ..</span>
+<span class="err">ls -l ..</span>
+<span class="err">ls -la</span>
+<span class="err">cd ..</span>
+<span class="err">ls -l</span>
+<span class="err">cd new_dir</span>
+<span class="err">date</span>
+<span class="err">echo &quot;hello&quot;</span>
+<span class="err">echo &quot;hello&quot; &gt; file.txt</span>
+<span class="err">cat file.txt</span>
+<span class="err">echo &quot; world&quot; &gt; file2.txt</span>
+<span class="err">cat file.txt file2.txt</span>
+<span class="err">cat file.txt file2.txt &gt; file3.txt</span>
+<span class="err">cat file3.txt</span>
+<span class="err">cat file2.txt</span>
+<span class="err">echo &quot;world&quot; &gt; file2.txt</span>
+<span class="err">cat file2.txt</span>
+<span class="err">cat file.txt file2.txt </span>
+<span class="err">cat file3.txt</span>
+<span class="err">md5</span>
+<span class="err">echo &quot;hello&quot;</span>
+<span class="err">echo &quot;hello&quot; | md5</span>
+<span class="err">md5 file.txt</span>
+<span class="err">echo &quot;hello&quot; | md5</span>
+<span class="err">echo &quot;hello1&quot; | md5</span>
+<span class="err">echo &quot;hello&quot; | md5</span>
+<span class="err">echo &quot;hell0&quot; | md5</span>
+<span class="err">echo &quot;hell0&quot; | base64</span>
+<span class="err">ls /</span>
+<span class="err">ls -l</span>
+<span class="err">pwd</span>
+<span class="err">ls ~</span>
+<span class="err">ls ~ -l</span>
+<span class="err">ls -l ~</span>
+<span class="err">ls -l ~ | tail -n 5</span>
+<span class="err">ls -l ~ | head -n 5</span>
+<span class="err">ls -l ~ | less</span>
+<span class="err">ls -l ~ | less</span>
+<span class="err">ls </span>
+<span class="err">ls -l </span>
+<span class="err">ls -l  </span>
+<span class="err">ls -l   | grep file2</span>
+<span class="err">ls -l   | grep file</span>
+<span class="err">echo &quot;my stdout&quot; | cat</span>
+<span class="err">cat *</span>
+<span class="err">grep world file2.txt</span>
+<span class="err">grep world file3.txt</span>
+<span class="err">grep</span>
+<span class="err">grep world *</span>
+<span class="err">cat * | grep world</span>
+<span class="err">grep world</span>
+<span class="err">grep world *</span>
+<span class="err">mkdir sub_dir</span>
+<span class="err">echo &quot;this is another file with the word world in it&quot; &gt; sub_dir/newfile.txt</span>
+<span class="err">cat sub_dir/newfile.txt</span>
+<span class="err">grep world *</span>
+<span class="err">grep -R world *</span>
+<span class="err">curl</span>
+<span class="err">curl --head --silent google.com</span>
+<span class="err">curl --head --silent google.com | grep Location</span>
+<span class="err">curl google.com</span>
+<span class="err">curl -L google.com</span>
+<span class="err">curl -L google.com | less</span>
+<span class="err">ssh asclab-c1</span>
+<span class="err">curl asclab.ucsf.edu/test.csv</span>
+<span class="err">curl -L asclab.ucsf.edu/test.csv</span>
+<span class="err">curl -L asclab.ucsf.edu/test.csv</span>
+<span class="err">clear</span>
+<span class="err">curl -L asclab.ucsf.edu/test.csv</span>
+<span class="err">curl -L asclab.ucsf.edu/test.csv | less </span>
+<span class="err">curl -L asclab.ucsf.edu/test.csv | less -S </span>
+<span class="err">curl -L asclab.ucsf.edu/test.csv | grep MYC</span>
+<span class="err">curl -L asclab.ucsf.edu/test.csv | grep -w MYC</span>
+<span class="err">curl -L asclab.ucsf.edu/test.csv | grep -w &#39;^MYC&#39;</span>
+<span class="err">curl -L --silent asclab.ucsf.edu/test.csv | grep -w &#39;^MYC&#39;</span>
+<span class="err">curl -L --silent asclab.ucsf.edu/test.csv | grep -w &#39;ABL&#39;</span>
+<span class="err">curl -L --silent asclab.ucsf.edu/test.csv | grep -w &#39;ABL1&#39;</span>
+<span class="err">curl -L --silent asclab.ucsf.edu/test.csv | grep -w &#39;abl1&#39;</span>
+<span class="err">curl -L --silent asclab.ucsf.edu/test.csv | grep -wI &#39;ABL1&#39;</span>
+<span class="err">curl -L --silent asclab.ucsf.edu/test.csv | grep -wI &#39;abl1&#39;</span>
+<span class="err">curl -L --silent asclab.ucsf.edu/test.csv | grep -wi &#39;abl1&#39;</span>
+<span class="err">curl -L --silent asclab.ucsf.edu/test.csv | grep -wi &#39;abl1&#39; | less -S</span>
+<span class="err">ssh asclab-c1.ucsf.edu</span>
+</code></pre></div></div>
+        
+        
+    </div>
+
+    <footer class="col-md-12 text-center">
+        
+        <hr>
+        <p>
+        <!--
+		<small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</small>
+	-->
+	</p>
+
+        
+        
+    </footer>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../js/bootstrap-3.0.3.min.js"></script>
+    
+    <script>var base_url = ".."</script>
+    
+    <script src="../js/base.js"></script>
+    <script src="../search/main.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+    </body>
+
+</html>

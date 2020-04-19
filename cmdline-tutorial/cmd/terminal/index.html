@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <link rel="shortcut icon" href="../../img/favicon.ico">
+
+    
+    <title>Terminal / SSH - Command-line tutorial&nbsp;&nbsp;</title>
+    
+
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-IIED/eyOkM6ihtOiQsX2zizxFBphgnv1zbe1bKA+njdFzkr6cDNy16jfIKWu4FNH" crossorigin="anonymous">
+
+<!--
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
+-->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css">
+    <link href='//rsms.me/inter/inter.css' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="../../css/base.min.css" rel="stylesheet">
+    <link href="../../css/cinder.min.css" rel="stylesheet">
+
+    
+    <link href="../../css/style.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+        <![endif]-->
+
+    
+
+     
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <a class="nav navbar-logo" href="/"><i class="fas fa-books"></i>&nbsp;&nbsp;docs.compgen.io</a>
+            <a class="navbar-brand" href="../..">Command-line tutorial&nbsp;&nbsp;</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Command-line <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../..">Welcome</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../concepts/">Unix concepts</a>
+</li>
+
+                        
+                            
+<li class="active">
+    <a href="./">Terminal / SSH</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../common/">Common commands</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../transfer/">Tranferring data</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../customizing/">Customizing the shell</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../scripts/">Writing scripts</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../02-Data_Processing/">Data pipelines</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../otherlinks/">Links</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../../git/">Git</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../../clusters/">Cluster jobs</a>
+                    </li>
+                
+                
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                            <i class="fas fa-search"></i> Search
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="../concepts/">
+                            <i class="fas fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="next" href="../common/">
+                            Next <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/compgen-io/cmdline-tutorial/edit/master/docs/cmd/terminal.md"><i class="fab fa-github"></i> Edit on GitHub</a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div class="container">
+        
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="first-level active"><a href="#opening-a-terminal">Opening a terminal</a></li>
+            <li class="second-level"><a href="#mac">Mac</a></li>
+                
+            <li class="second-level"><a href="#windows">Windows</a></li>
+                
+        <li class="first-level "><a href="#remote-server-via-ssh">Remote server (via SSH)</a></li>
+            <li class="second-level"><a href="#connecting-to-the-remote-server">Connecting to the remote server</a></li>
+                
+                <li class="third-level"><a href="#mac-linux">Mac / Linux</a></li>
+                <li class="third-level"><a href="#windows_1">Windows</a></li>
+                <li class="third-level"><a href="#security">Security</a></li>
+            <li class="second-level"><a href="#disconnecting">Disconnecting</a></li>
+                
+            <li class="second-level"><a href="#authentication">Authentication</a></li>
+                
+                <li class="third-level"><a href="#mac-linux_1">Mac / Linux</a></li>
+                <li class="third-level"><a href="#windows_2">Windows</a></li>
+            <li class="second-level"><a href="#ssh-configuration">SSH configuration</a></li>
+                
+            <li class="second-level"><a href="#ssh-alternatives">SSH alternatives</a></li>
+                
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<h1>The terminal</h1>
+
+<p>The terminal is the common interface for all command-line access. Most often, the terminal will be a GUI program that just has a big, blank text area with a command-prompt. A GUI isn&rsquo;t required, however&hellip; terminals can be seen when a computer starts in text-mode, or even accessed through a web-site.</p>
+<h2 id="opening-a-terminal">Opening a terminal</h2>
+<h3 id="mac">Mac</h3>
+<p>To open a terminal session on a Mac, you will need to run the <code>Terminal</code> application. It is located in <code>/Applications/Utilities/Terminal.app</code></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>One easy way to do this is to use Spotlight Search (<code>⌘-space</code>) and type <code>Terminal</code> to quickly start the program.</p>
+</div>
+<p><img alt="Terminal" src="../img/mac-terminal.png" /></p>
+<h4>Disconnecting</h4>
+<p>When you are done with your session and want to cleanly exit, run the <code>exit</code> command. This will close this terminal session. The window may still appear, but it can be safely closed. </p>
+<p>Alternatively, you could also quit the program entirely with <code>⌘-q</code>. This will only work if there aren&rsquo;t other programs still running.</p>
+<h3 id="windows">Windows</h3>
+<p>Windows, doesn&rsquo;t have a good default terminal available. Because of this, you will need to skip ahead to the <a href="#remote-server-ssh">Remote server (SSH)</a> section.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There are terminal programs for Windows, including Cygwin and the WSL; however setting these up is outside of the scope of this tutorial. When getting started, it is easier to SSH to a server and get started there.</p>
+</div>
+<h1 id="remote-server-via-ssh">Remote server (via SSH)</h1>
+<p>Connecting to a remote server has many advantages over using only your local computer.
+First, the amount of processing power and storage on remote server can be significantly greater
+than that of a laptop. Second, when you are using a shared server, it is easier to share data and programs with others. </p>
+<p>The main network protocol that is used to connect to a remote server is called SSH. This stands for &ldquo;Secure Shell&rdquo;. This program
+works by creating an encrypted tunnel between your computer and the remote server. When you are using SSH, you are connecting to the
+remote server in as secure a manner as possible.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When you connect to a remote server, your local computer (laptop / desktop / phone), is also known as the &ldquo;client&rdquo;. So, if you see the word &ldquo;client&rdquo;, that almost always refers to the local computer you are physically using. The &ldquo;server&rdquo; is almost always the remote computer you are connected to.</p>
+</div>
+<h2 id="connecting-to-the-remote-server">Connecting to the remote server</h2>
+<h3 id="mac-linux">Mac / Linux</h3>
+<p>When using a Mac or Linux computer, SSH is built into the operating system. However, it is not a graphical (GUI) program, but rather a command-line program. In order to start SSH, you need to first open a terminal (<a href="#opening-a-terminal">see above</a>). Next, the command you need to enter is:</p>
+<div class="codehilite"><pre><span></span><code>$ ssh username@hostname
+</code></pre></div>
+
+
+<p>Where the <code>username</code> is your username on the remote server and <code>hostname</code> is the hostname or ip-address of the server. For example, 
+to connect to the remote server <code>example.com</code> with the username of <code>billy</code>, you&rsquo;d type:</p>
+<div class="codehilite"><pre><span></span><code>$ ssh billy@example.com
+</code></pre></div>
+
+
+<p>If this looks a bit like an email address, that&rsquo;s because they both refer to similar concepts — a user account on a specific server! And if your username on the remote server is the same as your username on your desktop/laptop, you don&rsquo;t even need to tell SSH the password.</p>
+<p>The SSH program is quite powerful, and can be used to do many other things, such as creating tunnels to remote servers, but for now, we&rsquo;ll just concentrate on the primary purpose of connecting to remote servers.</p>
+<h3 id="windows_1">Windows</h3>
+<p>Using SSH on a Windows computer requires a GUI client<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>.</p>
+<h4>Putty</h4>
+<p>One SSH client that I&rsquo;ve used in the past is: <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/">PuTTY</a>. This is one of the most commonly used Windows SSH clients, and will support any of the commands that we will discuss in this tutorial.</p>
+<p><img alt="PuTTY" src="../img/putty.png" /></p>
+<p><a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/">https://www.chiark.greenend.org.uk/~sgtatham/putty/</a></p>
+<h4>MobaXterm</h4>
+<p>Another recommended option is MobaXterm, which is a more full-featured program that includes support for tabbed connections and X11 graphics.</p>
+<p><img alt="MobaXterm" src="../img/feature-terminal.png" /></p>
+<p><a href="https://mobaxterm.mobatek.net/">https://mobaxterm.mobatek.net/</a></p>
+<h3 id="security">Security</h3>
+<p>Regardless of the method you use to connect to a remote server, when you connect the first time to a server, the SSH software will likely ask you to confirm the server&rsquo;s identity. This is a normal prompt the first time you connect to a server. You will be presented with a signature (SHA256, MD5, etc) of the key that will look something like this: <code>ECDSA key fingerprint is SHA256:zC45ZzJRNzPYcjdS7dTHULo16Zl71g7sgm2fwC0ShGA</code>. These signatures are a security feature used to confirm that you&rsquo;re connecting to the server you expect and that no one else is listening into your connection. But, the first time you connect to a server, you may not know this information. If the remote server&rsquo;s administrator has given you these signatures, then you can compare that values you have to the ones you expect. But, if you don&rsquo;t have the signatures beforehand, you&rsquo;ll probably have to trust that the server is who they say they are.</p>
+<p>The entire point of SSH is security (SSH stands for &ldquo;secure shell&rdquo;), so if you have any questions, you should ask the server&rsquo;s admin.</p>
+<h2 id="disconnecting">Disconnecting</h2>
+<p>When you are done with your session and want to cleanly exit, again you can run the <code>exit</code> command. This will close the connection to the remote server.</p>
+<p>This will only work if there aren&rsquo;t background jobs running on the server. If you get a message about &ldquo;suspended jobs&rdquo;, check the section on <a href="../common/#process-control">process control</a>.</p>
+<h2 id="authentication">Authentication</h2>
+<p>In general, most servers allow you to authenticate with a username/password combination. However, it can get tiring typing passwords all the time — also, using passwords isn&rsquo;t as secure as possible. Because of this, some servers require the use of public/private keys. Public key encryption is out of the scope for this tutorial, but if you&rsquo;re interested in learning more, you can check out the Wikipedia entry on <a href="https://en.wikipedia.org/wiki/Public-key_cryptography">Public key cryptography</a>. The basic concept though is that you have two keys: the public one and the private one. The public one is what you can hand out to other people&hellip; in this case the other server. The private key, you keep secret. It should always stay on your computer and never be copied to the server. The server also has a set of public/private keys. When you talk to the server, you use <em>your</em> private key and <em>its</em> public key. When the server sends information to you, it uses <em>its</em> private key and <em>your</em> public key.</p>
+<h3 id="mac-linux_1">Mac / Linux</h3>
+<p>For the purposes of SSH, if you need to generate a public key to use to connect to a server, there is a program called <code>ssh-keygen</code> that will handle it for you. When you run this program, it will generate a fresh public/private key pair for you. You can set a password on the key, which will let you access the key. It is <strong>highly</strong> recommended that you set a password for the key. By default, this key will be named <code>$HOME/.ssh/id_rsa</code> or <code>$HOME/.ssh/id_dsa</code>, depending on the configured algorithm. Don&rsquo;t worry, the server will likley be able to handle either format.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Wait&hellip; but I thought that using a password wasn&rsquo;t as secure as public keys?!? If that&rsquo;s the case, then why another password?</p>
+<p>Originally, the password was send to the remote server to authenticate you. With public/private keys, it is your key that authenticates you. The password protects your private key on your computer&hellip; the password and private key never get sent anywhere. The key is what authenticates you with the server. The password for the key is used to &ldquo;unlock&rdquo; the key so that it can be used to authenticate you with the server.</p>
+</div>
+<p>For more information, see this help document from Github: <a href="https://help.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">https://help.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent</a></p>
+<h3 id="windows_2">Windows</h3>
+<p>For Windows, the program PuTTYgen can also be used to generate keys. For more information see these links:</p>
+<ul>
+<li><a href="https://www.ssh.com/ssh/putty/windows/puttygen/">https://www.ssh.com/ssh/putty/windows/puttygen/</a></li>
+<li><a href="https://www.puttygen.com/">https://www.puttygen.com/</a></li>
+</ul>
+<h2 id="ssh-configuration">SSH configuration</h2>
+<p>As your SSH settings get more complex, you may want to look at writing an ssh config file. This file contains all of the settings that you&rsquo;d normally use (like hostname, username, and if you use different keys for different servers). The settings can be set for a per-server or global basis. On Mac/Linux, this file is located in <code>$HOME/.ssh/config</code>. On Windows, the values can all be set in PuTTY.</p>
+<p>For more information see these sites:</p>
+<ul>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-configure-custom-connection-options-for-your-ssh-client">https://www.digitalocean.com/community/tutorials/how-to-configure-custom-connection-options-for-your-ssh-client</a></li>
+<li><a href="https://nerderati.com/2011/03/17/simplify-your-life-with-an-ssh-config-file">https://nerderati.com/2011/03/17/simplify-your-life-with-an-ssh-config-file</a></li>
+<li>(Windows) <a href="https://www.ssh.com/ssh/putty/windows/">https://www.ssh.com/ssh/putty/windows/</a></li>
+</ul>
+<h2 id="ssh-alternatives">SSH alternatives</h2>
+<p>There are a few alternatives for connecting to a remote server. One relatively common alternative is <a href="https://mosh.org/">mosh</a>, which stands for &ldquo;Mobile shell&rdquo;. This program still uses SSH for the initial authentication steps, but after that, the programs are very different. Mosh is designed to be used on mobile phone networks where the connections are not expected to be robust. To account for this, mosh is designed to work around issues like dropped connections and changed IP addresses. Not all servers support mosh, but if you routinely connect to a remote server using a mobile phone network (or even spotty WiFi), it can be a great tool.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>Again, I&rsquo;m intentionally ignoring things like WSL and Cygwin.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></div>
+        
+        
+    </div>
+
+    <footer class="col-md-12 text-center">
+        
+        <hr>
+        <p>
+        <!--
+		<small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</small>
+	-->
+	</p>
+
+        
+        
+    </footer>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../../js/bootstrap-3.0.3.min.js"></script>
+    
+    <script>var base_url = "../.."</script>
+    
+    <script src="../../js/base.js"></script>
+    <script src="../../search/main.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+    </body>
+
+</html>
